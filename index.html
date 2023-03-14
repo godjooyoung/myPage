@@ -81,12 +81,28 @@
             color: gray;
         }
     </style>
+    <script>
+        // jQuery를 통해서 DOM 의 아이디를 확인한 다음 텍스트를 변경하는 소스입니다.
+        // 화면을 반복적으로 새로고침 하다보면 미리 작성해둔 20도 라는 온도가 보입니다.
+        // 도큐먼트가 다 레디된 다음 아이디를 가져와 값을 넣는 거다보니 어쩔수 없다는거 이해합니다.
+        // 제이쿼리랑 자바스크립트단에서 이러한 깜빡임 없이 데이터를 바로 랜더링 해서 보여줄수 잇는 방법이 잇을가요?
+        // 다른분들은 어떻게 하시는지 궁금합니다.
+        $(document).ready(function () {
+            fetch("http://spartacodingclub.shop/sparta_api/weather/seoul")
+            .then(res => res.json())
+            .then(data => {
+                let temp = data['temp']
+                $('#temp').text(temp)
+            })
+        })
+    </script>
 </head>
 
 <body>
     <div class="myTitle">
         <h1>내 생애 최고의 영화들</h1>
-        <button>영화 기록하기</button>
+        <div>현재 서울의 날씨 : <span id="temp">20</span>도</div>
+        <button onclick="hey()">영화 기록하기</button>
     </div>
 
     <div class="myPost">
